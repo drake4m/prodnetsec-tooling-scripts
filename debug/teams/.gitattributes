@@ -1,0 +1,3 @@
+# Préserver les fins de ligne Windows pour les scripts signés
+*.ps1 binary
+*.bat binary
