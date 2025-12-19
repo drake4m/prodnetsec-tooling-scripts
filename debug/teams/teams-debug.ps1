@@ -439,7 +439,7 @@ function Get-Environment {
     
     # Test 3: Alternative connectivity test (Windows 10+)
     try {
-        $httpTestAlt = Invoke-WebRequest -Uri 'http://www.msftconnecttest.com/redirect' -MaximumRedirection 0 -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop
+        $null = Invoke-WebRequest -Uri 'http://www.msftconnecttest.com/redirect' -MaximumRedirection 0 -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop
     } catch {
         # Expected to get 302 redirect
         if ($_.Exception.Response.StatusCode -eq 'Found' -or $_.Exception.Message -match '302') {
@@ -1189,7 +1189,7 @@ function Write-ResultsTable {
 # FINAL REPORT GENERATION
 # ============================================================================
 
-function Generate-FinalReport {
+function New-FinalReport {
     $report = [System.Text.StringBuilder]::new()
     
     [void]$report.AppendLine("")
@@ -1375,7 +1375,7 @@ $($Script:DetailedLog.ToString())
 
         # Export final report (for email)
         $reportFile = $Path -replace '\.csv$', '-RAPPORT.txt'
-        $finalReport = Generate-FinalReport
+        $finalReport = New-FinalReport
         $finalReport | Out-File -FilePath $reportFile -Encoding UTF8
         Write-Host "  [+] Rapport final (email): $reportFile" -ForegroundColor Green
 
@@ -1419,7 +1419,7 @@ if ($Export) {
 }
 
 # Phase 6: Final Report Display
-$finalReport = Generate-FinalReport
+$finalReport = New-FinalReport
 Write-Header "RAPPORT FINAL (COPIER-COLLER POUR EMAIL)"
 Write-Host $finalReport -ForegroundColor White
 
@@ -1434,3 +1434,30 @@ Write-Host "    - RAPPORT : $($Export -replace '\.csv$', '-RAPPORT.txt')" -Foreg
 Write-Host ""
 Write-Host "  [!] Vous pouvez copier le rapport ci-dessus pour l'envoyer par email" -ForegroundColor Yellow
 Write-Host ""
+
+# SIG # Begin signature block
+# MIIEWQYJKoZIhvcNAQcCoIIESjCCBEYCAQExDzANBglghkgBZQMEAgEFADB5Bgor
+# BgEEAYI3AgEEoGswaTA0BgorBgEEAYI3AgEeMCYCAwEAAAQQH8w7YFlLCE63JNLG
+# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCC6EJBGd1qMnEK1
+# FMZiFdUNO3Q72qGdk+n1eKsmvYKXZqCCAkswggJHMIIBsKADAgECAhBsFMR9j+F2
+# j0gDPwhXGnc5MA0GCSqGSIb3DQEBBQUAMCgxJjAkBgNVBAMTHU9wZW4gU291cmNl
+# IC0gVG9vbGluZyBTY3JpcHRzMB4XDTI0MTIzMTIzMDAwMFoXDTMwMTIzMTIzMDAw
+# MFowKDEmMCQGA1UEAxMdT3BlbiBTb3VyY2UgLSBUb29saW5nIFNjcmlwdHMwgZ8w
+# DQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALzTWKzo1CV6B/I88KWstlfPoegUCAVM
+# eNTfbu+2SAWk9Y/igwl+tOPFz9Ufcip9Ad8hwAIQ9ZY6pQHz1Q1u0mIqrhMU8nC+
+# MSgUhqo2RL8inzIlUTLZDlR72J2xfwStCm486LJpSL/LBTYARWBzKxUBpuFZDhWL
+# OXscqwgdHNN1AgMBAAGjcjBwMBMGA1UdJQQMMAoGCCsGAQUFBwMDMFkGA1UdAQRS
+# MFCAEHeYnWBUDvZNV8qpp54CmIqhKjAoMSYwJAYDVQQDEx1PcGVuIFNvdXJjZSAt
+# IFRvb2xpbmcgU2NyaXB0c4IQbBTEfY/hdo9IAz8IVxp3OTANBgkqhkiG9w0BAQUF
+# AAOBgQCGGiZz8gG8GLGzoeAURFUs4OvQd+Qmy85ixM7ELID1lGtdQeM7umkS4GW5
+# IyCgprJdYrCUbdTpIP65RSAZw+Rr0+HM6sbb5Gekznhsy+X0HsnMmMGVw37EcTT/
+# s5Ww0OudJKOkUrgkNG90ZwUm8we8CPozg3r8Mo4B6FGVjZxlOjGCAWQwggFgAgEB
+# MDwwKDEmMCQGA1UEAxMdT3BlbiBTb3VyY2UgLSBUb29saW5nIFNjcmlwdHMCEGwU
+# xH2P4XaPSAM/CFcadzkwDQYJYIZIAWUDBAIBBQCgfDAQBgorBgEEAYI3AgEMMQIw
+# ADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgELMQ4wDAYK
+# KwYBBAGCNwIBFTAvBgkqhkiG9w0BCQQxIgQgCpSGiWNzP/S4FTfczI2u/PLMKt/7
+# eycn2uxKVqyxsJUwDQYJKoZIhvcNAQEBBQAEgYAi83c9xsLj1i+xXGceC5Fc/s1G
+# YkNPLBoDy02hnuoSW83SJRo8lH1XkclW5Y8Lk/ZaTjYBE0KYiMpnECzl8+cJ8Xq3
+# bXFNRUS1a4tQTGg9ola2tLmU+jd30w7wMZmdqulBFl735wTfyufjdcmGtkKDQ/4Y
+# O6N2dViRByYGhU036g==
+# SIG # End signature block
