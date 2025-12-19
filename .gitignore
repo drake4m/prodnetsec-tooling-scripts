@@ -1,0 +1,12 @@
+# Claude Code
+.claude/
+
+# Fichiers de diagnostic temporaires
+TEAMS-DIAGNOSTIC-*.txt
+TEAMS-DIAGNOSTIC-*.csv
+TEAMS-DIAGNOSTIC-*.log
+*-DETAILED.log
+*-RAPPORT.txt
+TEST-*.csv
+TEST-*.txt
+TEST-*.log
